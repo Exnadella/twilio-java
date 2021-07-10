@@ -212,7 +212,7 @@
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
-      <version>1.7.30</version>
+      <version>1.7.31</version>
     </dependency>
     <dependency>
       <groupId>javax.xml.bind</groupId>
@@ -316,8 +316,8 @@
           <version>true</version>
           <use>true</use>
           <windowtitle>Twilio Java</windowtitle>
-          <doctitle>&lt;h1&gt;Twilio Java&lt;/h1&gt;</doctitle>
-          <bottom>&lt;i&gt;Copyright &amp;#169; 2019 Twilio, Inc. All Rights Reserved.&lt;/i&gt;</bottom>
+          <doctitle>&lt;h1>Twilio Java&lt;/h1></doctitle>
+          <bottom>&lt;i>Copyright &amp;#169; 2019 Twilio, Inc. All Rights Reserved.&lt;/i></bottom>
         </configuration>
         <executions>
           <execution>
@@ -380,7 +380,7 @@
             </goals>
             <configuration>
               <rules>
-                <dependencyConvergence></dependencyConvergence>
+                <dependencyConvergence/>
               </rules>
             </configuration>
           </execution>
