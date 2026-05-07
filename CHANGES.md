@@ -1,6 +1,20 @@
 twilio-java changelog
 =====================
 
+[2026-05-07] Version 12.1.1
+---------------------------
+**Library - Chore**
+- [PR #957](https://github.com/twilio/twilio-java/pull/957): changed reference of mvn repo. Thanks to [@sbansla](https://github.com/sbansla)!
+
+**Conversations**
+- update actions api visibility
+
+**Memory**
+- ## 2026-05-07
+- **Content updates**:
+- include store api
+
+
 [2026-05-06] Version 12.1.0
 ---------------------------
 **Library - Feature**

@@ -35,6 +35,7 @@ import com.twilio.type.*;
 import java.io.IOException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -289,8 +290,28 @@ public class Profile extends Resource {
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class FetchProfileResponse extends Resource {
 
+        @Getter
+        private final ZonedDateTime createdAt;
+
+        @Getter
+        private final String id;
+
+        @Getter
+        private final Map<String, Map<String, Object>> traits;
+
         @JsonCreator
-        private FetchProfileResponse() {}
+        private FetchProfileResponse(
+            @JsonProperty("createdAt") final ZonedDateTime createdAt,
+            @JsonProperty("id") final String id,
+            @JsonProperty("traits") final Map<
+                String,
+                Map<String, Object>
+            > traits
+        ) {
+            this.createdAt = createdAt;
+            this.id = id;
+            this.traits = traits;
+        }
 
         public static FetchProfileResponse fromJson(
             final InputStream json,
@@ -316,12 +337,16 @@ public class Profile extends Resource {
                 return false;
             }
             FetchProfileResponse other = (FetchProfileResponse) o;
-            return true;
+            return (
+                Objects.equals(createdAt, other.createdAt) &&
+                Objects.equals(id, other.id) &&
+                Objects.equals(traits, other.traits)
+            );
         }
 
         @Override
         public int hashCode() {
-            return Objects.hash();
+            return Objects.hash(createdAt, id, traits);
         }
     }
 
@@ -337,6 +362,13 @@ public class Profile extends Resource {
         final String pathProfileId
     ) {
         return new ProfileDeleter(pathStoreId, pathProfileId);
+    }
+
+    public static ProfileFetcher fetcher(
+        final String pathStoreId,
+        final String pathProfileId
+    ) {
+        return new ProfileFetcher(pathStoreId, pathProfileId);
     }
 
     public static ProfileReader reader(final String pathStoreId) {

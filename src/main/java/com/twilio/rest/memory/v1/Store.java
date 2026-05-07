@@ -141,8 +141,20 @@ public class Store extends Resource {
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class DeleteStoreResponse extends Resource {
 
+        @Getter
+        private final String message;
+
+        @Getter
+        private final String statusUrl;
+
         @JsonCreator
-        private DeleteStoreResponse() {}
+        private DeleteStoreResponse(
+            @JsonProperty("message") final String message,
+            @JsonProperty("statusUrl") final String statusUrl
+        ) {
+            this.message = message;
+            this.statusUrl = statusUrl;
+        }
 
         public static DeleteStoreResponse fromJson(
             final InputStream json,
@@ -168,12 +180,15 @@ public class Store extends Resource {
                 return false;
             }
             DeleteStoreResponse other = (DeleteStoreResponse) o;
-            return true;
+            return (
+                Objects.equals(message, other.message) &&
+                Objects.equals(statusUrl, other.statusUrl)
+            );
         }
 
         @Override
         public int hashCode() {
-            return Objects.hash();
+            return Objects.hash(message, statusUrl);
         }
     }
 
@@ -371,6 +386,10 @@ public class Store extends Resource {
         final Store.ServiceRequest serviceRequest
     ) {
         return new StoreCreator(serviceRequest);
+    }
+
+    public static StoreDeleter deleter(final String pathStoreId) {
+        return new StoreDeleter(pathStoreId);
     }
 
     public static StoreFetcher fetcher(final String pathStoreId) {
